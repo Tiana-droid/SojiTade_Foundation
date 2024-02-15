@@ -49,6 +49,7 @@ export const Nav = styled.div`
         text-decoration: none;
         border: 2px solid #c84869;
         border-radius: 4px;
+        cursor: pointer;
       }
     }
     .menu {
@@ -91,6 +92,7 @@ export const Nav = styled.div`
       background-color: #fff;
       border-radius: 4px;
       color: #000;
+      cursor: pointer;
     }
   }
   .sidenav {
@@ -102,6 +104,7 @@ export const Nav = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 1em;
+    z-index: 20;
 
     ul {
       list-style: none;
@@ -141,6 +144,7 @@ export const Nav = styled.div`
       border: 2px solid #c84869;
       border-radius: 4px;
       text-align: center;
+      cursor: pointer;
     }
   }
 `;
@@ -166,8 +170,8 @@ export const Image = styled.div`
   z-index: -1;
 
   @media (min-width: 1000px) and (min-height: 1000px) {
-      height: fit-content;
-    }
+    height: fit-content;
+  }
 
   .splide__arrows {
     display: none;
@@ -287,6 +291,7 @@ export const Button = styled.button`
   border: none;
   outline: none;
   font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "500")};
+  cursor: pointer;
 `;
 export const Wrapper = styled.div`
   width: 94%;
@@ -348,6 +353,7 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
     @media (max-width: 500px) {
       width: 60%;
@@ -358,9 +364,13 @@ export const Wrapper = styled.div`
 
     .selected {
       background-color: #c84869;
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    
 
       a {
         color: white;
@@ -423,8 +433,8 @@ export const Outer = styled.div`
 
     section {
       display: flex;
-    flex-direction: column;
-    gap: 2em;
+      flex-direction: column;
+      gap: 2em;
     }
     b {
       color: #fff;
@@ -438,7 +448,7 @@ export const Outer = styled.div`
     }
     @media (min-width: 1200px) {
       flex-direction: row-reverse;
-    } 
+    }
   }
 
   @media (min-width: 1200px) {
@@ -600,13 +610,14 @@ export const AdminTab = styled(TabArea)`
   }
   button {
     width: ${({ width }) => (width ? width : "35%")};
-  height: 50px;
-  /* background-color: #c84869; */
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "8px")};
-  color: white;
-  border: none;
-  outline: none;
-  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "500")};
+    height: 50px;
+    /* background-color: #c84869; */
+    border-radius: ${({ borderRadius }) =>
+      borderRadius ? borderRadius : "8px"};
+    color: white;
+    border: none;
+    outline: none;
+    font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "500")};
   }
   ul {
     background-color: #fcfcfc;
@@ -629,6 +640,72 @@ export const AdminTab = styled(TabArea)`
     textarea {
       height: 200px;
       padding: 10px 8px;
+    }
+  }
+`;
+export const Donation = styled.div`
+  background-color: white;
+  height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  border-radius: 30px;
+  box-shadow: -4px -3px 0px 20px rgba(0, 0, 0, 0.7);
+  position: fixed;
+    width: 100%;
+    top: 10%;
+
+  @media (max-width: 500px) {
+    overflow-y: scroll;
+  }
+
+  .close {
+    cursor: pointer;
+    position: relative;
+    left: 40%;
+  }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    button {
+      margin-top: 20px;
+      font-size: 17px;
+
+      @media (max-width: 500px) {
+      width: 60%;
+    }
+    }
+  }
+
+  h1 {
+    font-size: 60px;
+    color: #c84869;
+
+    @media (max-width: 500px) {
+      font-size: 40px;
+    }
+  }
+
+  .inline {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    p,
+    span {
+      font-size: 25px;
     }
   }
 `;

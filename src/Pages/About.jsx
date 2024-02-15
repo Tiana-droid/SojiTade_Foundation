@@ -1,11 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Footer } from "../components";
 import { Header, Main } from "./style";
 import { Portrait } from "../Assets";
 import { Card } from "../components/style";
+import Donate from '../components/Donate';
 
 
 const About = () => {
+  const [showDonation, setShowDonation] = useState(false);
+  const Donation = () => {
+    setShowDonation(!showDonation);
+  };
   return (
     <>
       <Header>
@@ -68,8 +73,9 @@ const About = () => {
       <p>
       We Need Your Support Today!
       </p>
-      <button>Donate</button>
+      <button onClick={Donation}>Donate</button>
     </Header>
+      {showDonation&&<Donate close={Donation}/>}
       <Footer />
     </>
   );

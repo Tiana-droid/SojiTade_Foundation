@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { NavLinks } from "./Navbar";
 import { Logo } from "../Assets";
 import { Button, FooterWrapper } from "./style";
@@ -7,8 +7,14 @@ import { IoLocationOutline } from "react-icons/io5";
 import { MdOutlineLocalPhone, MdOutlineEmail } from "react-icons/md";
 import Handle from "./Handle";
 import { NavLink } from "react-router-dom";
+import Donate from "./Donate";
 
 const Footer = () => {
+  const [showDonation, setShowDonation] = useState(false);
+  const Donation = () => {
+    setShowDonation(!showDonation);
+  };
+
   return (
     <FooterWrapper>
       <div className="wrapper">
@@ -26,6 +32,7 @@ const Footer = () => {
             borderRadius="0px"
             fontWeight="600"
             style={{ fontSize: "16px" }}
+            onClick={Donation}
           >
             Donate
           </Button>
@@ -90,6 +97,7 @@ const Footer = () => {
         <p>Website Developed by <a href="https://rb.gy/hx98av" target="_blank" rel="noreferrer" style={{textDecoration: 'underline'}}>Tiana</a> </p>
         <p>&copy; Copyright 2024, SojiTade Foundation</p>
       </div>
+      {showDonation&&<Donate close={Donation}/>}
     </FooterWrapper>
   );
 };

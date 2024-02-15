@@ -195,7 +195,7 @@ const NewsDetails = () => {
                 </div>
               </Card>
 
-              <h3 style={{marginTop: '2em'}}>You are about to edit </h3>
+              <h3 style={{marginTop: '2em'}}>You are about to edit the above news </h3>
               <p>Do you wish to proceed?</p>
               <div className="prompt_btn">
               <Button onClick={handleEditClick}>Yes</Button>
@@ -222,7 +222,7 @@ const NewsDetails = () => {
               <h3>{news.title}.</h3>
             </div>
           </Card>
-          <h3 style={{marginTop: '2em'}}>You are about to delete </h3>
+          <h3 style={{marginTop: '2em'}}>You are about to delete the above news </h3>
           <p>Do you wish to proceed?</p>
           <div className="prompt_btn">
               <Button onClick={handleDeleteClick}>Yes</Button>

@@ -81,6 +81,7 @@ export const Main = styled.section`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 
     @media (max-width: 500px) {
       width: 60%;
@@ -91,13 +92,12 @@ export const Main = styled.section`
 
     .selected {
       background-color: #c84869;
-      width: 20px;
-      height: 20px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 5px;
 
       a {
         color: white;

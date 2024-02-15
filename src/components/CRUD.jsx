@@ -126,10 +126,6 @@ const CRUD = () => {
               onChange={(e) => setNewImage(e.target.value)}
               />
           </div>
-          {/* <div className="input">
-            <label htmlFor="tag">Tag</label>
-            <input type="text" id="tag" onChange={(e) => setNewTag(e.target.value)}/>
-          </div> */}
           <div className="input">
             <label htmlFor="category">Category</label>
             <input

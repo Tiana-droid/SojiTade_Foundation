@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import logo from "../Assets/logo.png";
 import { motion } from "framer-motion";
 import { FaBars } from "react-icons/fa";
-import { Nav, Flex } from "./style";
+import { Nav, Flex, Button } from "./style";
 import { NavLink} from "react-router-dom";
 import Donate from "./Donate";
 
@@ -31,9 +31,13 @@ export const NavLinks = [
 
 const Navbar = () => {
   const [draw, setDraw] = useState(false);
+  const [showDonation, setShowDonation] = useState(false);
 
   const Drawer = () => {
     setDraw(!draw);
+  };
+  const Donation = () => {
+    setShowDonation(!showDonation);
   };
   const variantsDesktop = {
     visible: {
@@ -96,7 +100,7 @@ const Navbar = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 1 }}
-              onClick={Drawer}
+              onClick={Donation}
             >
               Donate
             </motion.button>
@@ -138,18 +142,19 @@ const Navbar = () => {
               ))}
             </motion.ul>
 
-            <a
+            <Button
               className="donate-button"
               target="blank"
               href="/"
+              onClick={Donation}
             >
              Donate
-            </a>
+            </Button>
           </motion.div>
         </motion.div>
       )}
 
-      {draw && <Donate/>}
+      {showDonation && <Donate close = {Donation}/>}
     </Nav>
   );
 };

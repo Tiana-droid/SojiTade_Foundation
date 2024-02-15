@@ -56,7 +56,7 @@ const News = () => {
       <hr style={{ border: "0.5px solid #ececed" }} />
       <AdminSection>
         <h3>Read our latest news from our events so far</h3>
-        <Link to="/signup">
+        <Link to="/signup" style={{cursor: 'default'}}>
             <FaUser />
         </Link>
       </AdminSection>
@@ -71,6 +71,7 @@ const News = () => {
           pageCount={pageCount}
           previousLabel="< previous"
           renderOnZeroPageCount={null}
+          
         />
       </Wrapper>
       <Footer />

@@ -9,10 +9,15 @@ import {
 } from "react-icons/md";
 import { FaUser } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import Donate from "../components/Donate";
 
 const Events = () => {
   const [news, setNews] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
+  const [showDonation, setShowDonation] = useState(false);
+  const Donation = () => {
+    setShowDonation(!showDonation);
+  };
 
   useEffect(() => {
     fetch("http://localhost:5000/events")
@@ -158,7 +163,7 @@ const Events = () => {
               </label>
             </div>
           </InputWrapper>
-          <Link to="/login">
+          <Link to="/signup" style={{cursor: 'default'}}>
             <FaUser />
           </Link>
         </AdminSection>
@@ -208,8 +213,9 @@ const Events = () => {
       </section>
       <Header bgColor="#213e8c">
         <p>We Need Your Support Today!</p>
-        <button>Donate</button>
+        <button onClick={Donation}>Donate</button>
       </Header>
+        {showDonation&&<Donate close={Donation}/>}
       <Footer />
     </>
   );

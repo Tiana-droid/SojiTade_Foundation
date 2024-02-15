@@ -20,6 +20,10 @@ const isValidPassword = (password) => {
     const minLength = 8;
     return password.length >= minLength;
 };
+const isNameRequired = (name) => {
+  const minLength = 5
+    return name.length > minLength
+};
 
   const createAccount = async () => {
     if (!isValidEmail(email)) {
@@ -29,6 +33,10 @@ const isValidPassword = (password) => {
 
   if (!isValidPassword(password)) {
       toast.error("Password must be at least 8 characters long");
+      return;
+  }
+  if (!isNameRequired(name)) {
+      toast.error("Full name is required");
       return;
   }
     try {
