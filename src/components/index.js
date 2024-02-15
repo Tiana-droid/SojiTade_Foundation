@@ -1,0 +1,8 @@
+export  {default as NavBar} from './Navbar.jsx'
+export {default as Hero} from './Hero.jsx'
+export {default as TabSection} from './TabSection.jsx'
+export {default as Testimonies} from './Testimonies.jsx'
+export {default as Footer} from './Footer.jsx'
+export {default as Gallery} from './Gallery.jsx'
+export {default as CRUD} from './CRUD.jsx'
+export {default as ThematicFocus} from './ThematicFocus.jsx'

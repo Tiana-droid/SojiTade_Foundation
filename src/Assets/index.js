@@ -1,0 +1,15 @@
+export {default as Img1} from './IMG_20200224_114032.jpg';
+export {default as Img2} from './IMG_6082.jpg';
+export {default as Img3} from './IMG_9780.jpg'
+export {default as Img4} from './20230626_094555.jpg'
+export { default as tImg1} from './1.png'
+export { default as Logo} from './logo.png'
+export { default as Avatar} from './user.png'
+export { default as Help} from './smiling-female-engineer-showing-muscles-holding-helmet-white-background.jpg'
+export { default as Portrait} from './TIM_0978.jpg'
+export { default as Background} from './damian-zaleski-RYyr-k3Ysqg-unsplash.jpg'
+export {default as Headline1} from './WDAD.jpg'
+export {default as Headline2} from './WMHD.jpg'
+export {default as Headline3} from './SIIC.jpg'
+export {default as Headline4} from './EGCI.jpg'
+// export {default as Headline5} from './'

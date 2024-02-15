@@ -1,0 +1,7 @@
+export {default as About} from './About.jsx'
+export {default as Events} from './Events.jsx'
+export {default as Support} from './Support.jsx'
+export {default as Home} from './Index.jsx'
+export {default as Contact} from './Contact.jsx'
+export {default as News} from './News.jsx'
+export {default as NewsDetails} from './NewsDetails.jsx'
