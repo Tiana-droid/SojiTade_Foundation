@@ -72,7 +72,7 @@ const Events = () => {
                 </div>
               </div>
               <a href={`/news_details?id=${event.id}`} style={{ width: "30%" }}>
-                <Button borderRadius="0px" width="100%">
+                <Button $borderRadius="0px" $width="100%">
                   {presentEventChecked ? "Register" : "Read News"}
                 </Button>
               </a>
@@ -163,7 +163,7 @@ const Events = () => {
               </label>
             </div>
           </InputWrapper>
-          <Link to="/signup" style={{cursor: 'default'}}>
+          <Link to="/login" style={{cursor: 'default'}}>
             <FaUser />
           </Link>
         </AdminSection>
@@ -211,7 +211,7 @@ const Events = () => {
           </Main>
         )}
       </section>
-      <Header bgColor="#213e8c">
+      <Header $bgColor="#213e8c">
         <p>We Need Your Support Today!</p>
         <button onClick={Donation}>Donate</button>
       </Header>

@@ -17,14 +17,14 @@ export const InputWrapper = styled.div`
 export const Header = styled.header`
   width: 99%;
   padding: 10px;
-  height: ${({ height }) => (height ? height : "200px")};
+  height: ${({ $height }) => ($height ? $height : "200px")};
   margin: 50px auto 0px auto;
-  background-color: ${({ bgColor }) => (bgColor ? bgColor : "transparent")};
+  background-color: ${({ $bgColor }) => ($bgColor ? $bgColor : "transparent")};
   display: flex;
-  flex-direction: ${({ view }) => (view ? "row" : "column")};
-  align-items: ${({ alignItems }) => (alignItems ? alignItems : "center")};
+  flex-direction: ${({ $view }) => ($view ? "row" : "column")};
+  align-items: ${({ $alignItems }) => ($alignItems ? $alignItems : "center")};
   justify-content: center;
-  gap: ${({ gap }) => (gap ? gap : "1em")};
+  gap: ${({ $gap }) => ($gap ? $gap : "1em")};
   color: #ddd;
 
   h1 {
@@ -59,7 +59,7 @@ export const Header = styled.header`
   }
 `;
 export const Main = styled.section`
-  width: ${({ width }) => (width ? width : "100%")};
+  width: ${({ $width }) => ($width ? $width : "100%")};
   height: fit-content;
   padding: 15px;
   margin: auto;
@@ -83,11 +83,14 @@ export const Main = styled.section`
     justify-content: space-between;
     cursor: pointer;
 
-    @media (max-width: 500px) {
-      width: 60%;
+    @media (max-width: 400px) {
+      width: 90%;
+    }
+    @media (min-width: 400px) {
+      width: 65%;
     }
     @media (min-width: 768px) {
-      width: 30%;
+      width: 38%;
     }
 
     .selected {
@@ -411,7 +414,7 @@ export const AdminSection = styled.section`
 `;
 export const BackDrop = styled.div`
   width: 100%;
-  height: 180vh;
+  height: 380vh;
   background-color: rgba(255, 255, 255, 1);
   position: absolute;
   top: 0;
@@ -461,14 +464,14 @@ export const BackDrop = styled.div`
     }
 
     a {
-      width: ${({ width }) => (width ? width : "35%")};
+      width: ${({ $width }) => ($width ? $width : "35%")};
       height: 50px;
       border: 1px solid #c84869;
-      border-radius: ${({ borderRadius }) =>
-        borderRadius ? borderRadius : "8px"};
+      border-radius: ${({ $borderRadius }) =>
+        $borderRadius ? $borderRadius : "8px"};
       color: #c84869;
       outline: none;
-      font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "500")};
+      font-weight: ${({ $fontWeight }) => ($fontWeight ? $fontWeight : "500")};
       display: flex;
       align-items: center;
       justify-content: center;

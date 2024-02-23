@@ -69,7 +69,7 @@ const About = () => {
         </Card>
       </div>
     </Main>
-    <Header bgColor='#213e8c'>
+    <Header $bgColor='#213e8c'>
       <p>
       We Need Your Support Today!
       </p>

@@ -30,7 +30,6 @@ const Donate = ({close}) => {
             <p>Bank Name:</p> <span>Polaris Bank</span>
           </div>
           <Button
-            // width="10%"
             onClick={() => copyToClipBoard("Account No: 4091221297")}
           >
             Copy Acc No

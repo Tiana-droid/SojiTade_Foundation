@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Wrapper, Card, Button } from "../components/style";
 import { Header, AdminSection } from "./style";
-import { Footer, /*CRUD*/ } from "../components";
+import { Footer } from "../components";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { FaUser } from "react-icons/fa6";
@@ -35,7 +35,7 @@ const News = () => {
           </div>
           <div className="btn">
             <Link to={`/news_details?id=${en.id}`}>
-              <Button width="100%" borderRadius="4px" fontWeight="600">
+              <Button $width="100%" $borderRadius="4px" $fontWeight="600">
                 Read News
               </Button>
             </Link>
@@ -55,8 +55,8 @@ const News = () => {
       </Header>
       <hr style={{ border: "0.5px solid #ececed" }} />
       <AdminSection>
-        <h3>Read our latest news from our events so far</h3>
-        <Link to="/signup" style={{cursor: 'default'}}>
+        <h3>View the most recent news from our past events.</h3>
+        <Link to="/login" style={{cursor: 'default'}}>
             <FaUser />
         </Link>
       </AdminSection>

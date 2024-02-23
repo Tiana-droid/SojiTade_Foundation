@@ -44,7 +44,7 @@ const ThematicFocus = () => {
           <div key={f.id} className="content">
             <b>{f.title}</b>
             <ul>
-            {(f.list.map((li) => <li>{li}</li>))}
+            {(f.list.map((li, index) => <li key={index}>{li}</li>))}
             </ul>
           </div>
         ))}

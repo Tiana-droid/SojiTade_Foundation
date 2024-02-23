@@ -1,6 +1,6 @@
 import "./App.css";
 import { CRUD, NavBar } from "./components/index.js";
-import SignUp from "./Auth/SignUp.jsx";
+// import SignUp from "./Auth/SignUp.jsx";
 import LogIn from "./Auth/LogIn.jsx";
 import {
   About,
@@ -25,12 +25,12 @@ function App() {
         <Route exact path="/news_details" element={<NewsDetails />} />
         <Route exact path="/contact" element={<Contact />} />
         <Route exact path="/post" element={<CRUD />} />
-        <Route exact path="/signup" element={<SignUp />} />
+        {/* <Route exact path="/signup" element={<SignUp />} /> */}
         <Route exact path="/login" element={<LogIn />} />
       </Routes>
       <span className="message">
         <Link to="/contact">
-          <AiFillMessage />
+          <AiFillMessage className="message" />
         </Link>
       </span>
     </div>

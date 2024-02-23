@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Header, Main2, AdminSection, BackDrop } from "./style";
 import { Footer } from "../components";
+import NewsLogin from "../Auth/NewsLogin";
 import { Button, AdminTab, Card } from "../components/style";
 import { FaUser, FaArrowLeftLong } from "react-icons/fa6";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +14,7 @@ const NewsDetails = () => {
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
   const [showEditMode, setShowEditMode] = useState(false);
+  const [showLoginPage, setShowLoginPage] = useState(false);
   const [newValue, setValue] = useState({
     id: id,
     title: "",
@@ -22,6 +24,14 @@ const NewsDetails = () => {
   });
 
   const navigate = useNavigate();
+
+  const HandleLoginPage = () => {
+    setShowLoginPage(!showLoginPage)
+
+    setTimeout(() => {
+      setShowLoginPage(false)
+  }, 5000);
+  }
 
   useEffect(() => {
     const fetchSingleNews = async () => {
@@ -195,13 +205,13 @@ const NewsDetails = () => {
                 </div>
               </Card>
 
-              <h3 style={{marginTop: '2em'}}>You are about to edit the above news </h3>
+              <h3 style={{ marginTop: "2em" }}>
+                You are about to edit the above news{" "}
+              </h3>
               <p>Do you wish to proceed?</p>
               <div className="prompt_btn">
-              <Button onClick={handleEditClick}>Yes</Button>
-              <Link to="/news">
-                No
-              </Link>
+                <Button onClick={handleEditClick}>Yes</Button>
+                <Link to="/news">No</Link>
               </div>
             </div>
           )}
@@ -222,14 +232,14 @@ const NewsDetails = () => {
               <h3>{news.title}.</h3>
             </div>
           </Card>
-          <h3 style={{marginTop: '2em'}}>You are about to delete the above news </h3>
+          <h3 style={{ marginTop: "2em" }}>
+            You are about to delete the above news{" "}
+          </h3>
           <p>Do you wish to proceed?</p>
           <div className="prompt_btn">
-              <Button onClick={handleDeleteClick}>Yes</Button>
-              <Link to="/news">
-                No
-              </Link>
-              </div>
+            <Button onClick={handleDeleteClick}>Yes</Button>
+            <Link to="/news">No</Link>
+          </div>
         </div>
       ),
     },
@@ -237,7 +247,7 @@ const NewsDetails = () => {
 
   return (
     <div>
-      <Header height="400px" alignItems="flex-start" gap="3em">
+      <Header $height="400px" $alignItems="flex-start" gap="3em">
         <FaArrowLeftLong
           onClick={() => {
             navigate(-1);
@@ -256,11 +266,10 @@ const NewsDetails = () => {
             month: "long",
             day: "numeric",
           })}
-          
         </h3>
-
-        <FaUser onClick={() => setShowEditMode(!showEditMode)} />
+        <FaUser onClick={HandleLoginPage} />
       </AdminSection>
+      {showLoginPage && <NewsLogin showEditMode={showEditMode} setShowEditMode={setShowEditMode} />}
       <Main2 id="news">
         {loading ? (
           <p>Loading your news please wait...</p>
@@ -276,8 +285,8 @@ const NewsDetails = () => {
         <BackDrop>
           <span onClick={() => setShowEditMode(!showEditMode)}>close</span>
           <Header>
-        <h1>hello Admin</h1>
-      </Header>
+            <h1>hello Admin</h1>
+          </Header>
           <>
             {loading ? (
               <p>Loading...</p>

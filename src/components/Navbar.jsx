@@ -144,8 +144,6 @@ const Navbar = () => {
 
             <Button
               className="donate-button"
-              target="blank"
-              href="/"
               onClick={Donation}
             >
              Donate

@@ -150,12 +150,12 @@ export const Nav = styled.div`
 `;
 export const Flex = styled.div`
   display: flex;
-  align-items: ${({ alignItems }) => (alignItems ? alignItems : "center")};
-  justify-content: ${({ justifyContent }) =>
-    justifyContent ? justifyContent : "space-between"};
+  align-items: ${({ $alignItems }) => ($alignItems ? $alignItems : "center")};
+  justify-content: ${({ $justifyContent }) =>
+    $justifyContent ? $justifyContent : "space-between"};
   flex-direction: ${({ view }) => (view === "grid" ? "column" : "row")};
-  gap: ${({ gap }) => (gap ? gap : "3em")};
-  flex-wrap: ${({ flexWrap }) => (flexWrap ? flexWrap : "nowrap")};
+  gap: ${({ $gap }) => ($gap ? $gap : "3em")};
+  flex-wrap: ${({ $flexWrap }) => ($flexWrap ? $flexWrap : "nowrap")};
   height: inherit;
   flex-wrap: wrap;
   li {
@@ -165,7 +165,7 @@ export const Flex = styled.div`
 `;
 export const Image = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 120dvh;
   position: fixed;
   z-index: -1;
 
@@ -177,7 +177,7 @@ export const Image = styled.div`
     display: none;
   }
   .splide__track {
-    height: 90vh;
+    height: 120dvh;
 
     @media (min-width: 1000px) and (min-height: 1000px) {
       height: fit-content;
@@ -186,18 +186,18 @@ export const Image = styled.div`
 
   img {
     width: 100%;
-    height: 90vh;
+    height: 120dvh;
     object-fit: cover;
     object-position: center;
 
     @media (min-width: 1000px) and (min-height: 1000px) {
-      height: fit-content;
+      height: 70dvh;
     }
   }
 
   .topper {
     width: 100%;
-    height: 90vh;
+    height:120dvh;
     background-color: rgba(0, 0, 0, 0.4);
     position: absolute;
     top: 0;
@@ -283,14 +283,14 @@ export const TabArea = styled.section`
   }
 `;
 export const Button = styled.button`
-  width: ${({ width }) => (width ? width : "35%")};
+  width: ${({ $width }) => ($width ? $width : "35%")};
   height: 50px;
   background-color: #c84869;
-  border-radius: ${({ borderRadius }) => (borderRadius ? borderRadius : "8px")};
+  border-radius: ${({ $borderRadius }) => ($borderRadius ? $borderRadius : "8px")};
   color: white;
   border: none;
   outline: none;
-  font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "500")};
+  font-weight: ${({ $fontWeight }) => ($fontWeight ? $fontWeight : "500")};
   cursor: pointer;
 `;
 export const Wrapper = styled.div`
@@ -389,7 +389,7 @@ export const Wrapper = styled.div`
   }
 `;
 export const Card = styled.div`
-  width: ${({ width }) => (width ? width : "300px")};
+  width: ${({ $width }) => ($width ? $width : "300px")};
   height: fit-content;
   border: 0.2px solid #d6d6d6;
   box-shadow: 0px 1px 5px #bebebe;
@@ -609,15 +609,15 @@ export const AdminTab = styled(TabArea)`
     width: 50%;
   }
   button {
-    width: ${({ width }) => (width ? width : "35%")};
+    width: ${({ $width }) => ($width ? $width : "35%")};
     height: 50px;
     /* background-color: #c84869; */
-    border-radius: ${({ borderRadius }) =>
-      borderRadius ? borderRadius : "8px"};
+    border-radius: ${({ $borderRadius }) =>
+      $borderRadius ? $borderRadius : "8px"};
     color: white;
     border: none;
     outline: none;
-    font-weight: ${({ fontWeight }) => (fontWeight ? fontWeight : "500")};
+    font-weight: ${({ $fontWeight }) => ($fontWeight ? $fontWeight : "500")};
   }
   ul {
     background-color: #fcfcfc;
@@ -636,10 +636,16 @@ export const AdminTab = styled(TabArea)`
       height: 40px;
       word-wrap: break-word;
       padding: 10px 4px;
+      border: 2px solid #ddd;
     }
     textarea {
-      height: 200px;
+      height: 500px;
       padding: 10px 8px;
+      border: 2px solid #ddd;
+
+      @media (min-width: 800px) {
+        height: 300px;
+      }
     }
   }
 `;

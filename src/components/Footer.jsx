@@ -28,9 +28,9 @@ const Footer = () => {
             acute illiteracy in Nigeria. Join us in empowering Ondo State
           </p>
           <Button
-            width="170px"
-            borderRadius="0px"
-            fontWeight="600"
+            $width="170px"
+            $borderRadius="0px"
+            $fontWeight="600"
             style={{ fontSize: "16px" }}
             onClick={Donation}
           >

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Header } from "../Pages/style";
 import { AdminTab, Button } from "../components/style";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 
 const LogIn = () => {
@@ -58,7 +58,7 @@ const LogIn = () => {
   return (
     <>
       <Header>
-        <h1>Login</h1>
+        <h1>Admin Login Page</h1>
         <ToastContainer />
       </Header>
       <AdminTab>
@@ -87,10 +87,6 @@ const LogIn = () => {
         <Button type="submit" onClick={handleLogin}>
           Submit
         </Button>
-
-        <span style={{marginTop: '2em'}}>
-          Don't have an account? <Link to="/signup" style={{color: '#c84869', fontWeight: '600'}}>Signup</Link>
-        </span>
       </AdminTab>
     </>
   );
