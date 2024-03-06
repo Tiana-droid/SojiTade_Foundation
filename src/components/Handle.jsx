@@ -1,5 +1,5 @@
 import React from "react";
-import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin } from "react-icons/fi";
+import { FiFacebook, FiTwitter, FiInstagram, /*FiLinkedin*/} from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ const Links = [
   {
     id: "one",
     icon: <FiFacebook />,
-    ref: "https://web.facebook.com/sojitadefoundation-632875727233554/",
+    ref: "https://www.facebook.com/profile.php?id=100080214848398&mibextid=2JQ9oc",
   },
   {
     id: "two",
@@ -20,15 +20,15 @@ const Links = [
     icon: <FiInstagram />,
     ref: "https://www.instagram.com/sojitadefoundation/",
   },
-  {
-    id: "four",
-    icon: <FiLinkedin />,
-    ref: "#",
-  },
+  // {
+  //   id: "four",
+  //   icon: <FiLinkedin />,
+  //   ref: "#",
+  // },
   {
     id: "five",
     icon: <FaWhatsapp />,
-    ref: "#",
+    ref: "https://www.wa.link/yosp2l",
   },
 ];
 const UL = styled(motion.ul)`
