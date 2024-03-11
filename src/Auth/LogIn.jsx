@@ -32,10 +32,15 @@ const LogIn = () => {
       return;
     }
 
-    fetch("http://localhost:5000/account")
+    fetch("https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709", {
+      headers: {
+        "X-Master-Key":
+          "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+      },
+    })
       .then((res) => res.json())
       .then((data) => {
-        const user = data.find((user) => user.email === email);
+        const user = data.record.account.find((user) => user.email === email);
         if (user) {
           if (user.password === password) {
             toast.success("Login successful");

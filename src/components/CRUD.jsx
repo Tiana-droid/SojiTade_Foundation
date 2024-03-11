@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Header } from "../Pages/style";
 import { Button, AdminTab } from "./style";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { v4 as uuidv4 } from "uuid";
 
 const CRUD = () => {
+  const [news, setNews] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
   const [newImage, setNewImage] = useState("");
@@ -15,69 +16,147 @@ const CRUD = () => {
 
   const navigate = useNavigate();
 
+  const generateCommonId = () => {
+    return uuidv4();
+  };
+
+  // Usage
+  let commonId = generateCommonId();
+  console.log(commonId);
+
   const saveNews = async () => {
     try {
-      const res = await fetch("http://localhost:5000/news", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: Math.round(Math.random() * 10 + 1),
-          title: newTitle,
-          content: newContent,
-          img: newImage,
-          day: newDate,
-          category: newCategory,
-        }),
-      });
+      const res = await fetch(
+        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key":
+              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+            "X-ACCESS-KEY":
+              "$2a$10$U0AozbSuq.CgoXqnY.TVnOunKkkPIVzip0cRXTxP7LtVMx.eFz7Xu",
+          },
+        }
+      );
 
-      if (res.ok) {
-        toast.success('News created successfully')
+      const currentData = await res.json();
+
+      const newNewsItem = {
+        id: commonId,
+        title: newTitle,
+        content: newContent,
+        img: newImage,
+        day: newDate,
+        category: newCategory,
+      };
+
+      // Add the new news item to the existing news array
+      const updatedNews = [...currentData.record.news, newNewsItem];
+
+      // Construct the updated data object with the new news item
+      const updatedData = {
+        ...currentData.record,
+        news: updatedNews,
+      };
+
+      const putResponse = await fetch(
+        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key":
+              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
+
+      if (putResponse.ok) {
+        setNews(newNewsItem);
+        toast.success("News created successfully");
         setTimeout(() => {
-          navigate('/news')
-        }, 5000)
+          navigate("/news");
+        }, 5000);
       } else {
-        toast.error("Error: Event not created")
+        toast.error("Error: News not created");
       }
     } catch (error) {
       <h3>
-        {document.write("Error creating new event", error) }
-        <Link to="/news" style={{color: 'blue'}}>Go back</Link>
-      </h3>
+        {document.write("Error creating new news ", error)}
+        <Link to="/news" style={{ color: "blue" }}>
+          Go back
+        </Link>
+      </h3>;
     }
   };
 
   const saveEvents = async () => {
     try {
-      const res = await fetch("http://localhost:5000/events", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: Math.round(Math.random() * 10 + 1),
-          title: newTitle,
-          brief: newContent,
-          day: newDate,
-          category: newCategory,
-        }),
-      });
+      const res = await fetch(
+        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key":
+              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+            "X-ACCESS-KEY":
+              "$2a$10$U0AozbSuq.CgoXqnY.TVnOunKkkPIVzip0cRXTxP7LtVMx.eFz7Xu",
+          },
+        }
+      );
 
-      if (res.ok) {
-        toast.success('Event created successfully')
+      const currentData = await res.json();
+
+      const newEventItem = {
+        id: commonId,
+        title: newTitle,
+        brief: newContent,
+        img: newImage,
+        day: newDate,
+        category: newCategory,
+      };
+
+      // Add the new news item to the existing news array
+      const updatedNews = [...currentData.record.events, newEventItem];
+
+      // Construct the updated data object with the new event item
+      const updatedData = {
+        ...currentData.record,
+        events: updatedNews,
+      };
+
+      const putResponse = await fetch(
+        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Master-Key":
+              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+          },
+          body: JSON.stringify(updatedData),
+        }
+      );
+
+      if (putResponse.ok) {
+        setNews(newEventItem);
+        toast.success("Event created successfully");
         setTimeout(() => {
-          navigate('/events')
-        }, 5000)
+          navigate("/events");
+        }, 5000);
       } else {
-        toast.error("Error: Event not created")
+        toast.error("Error: Event not created");
       }
     } catch (error) {
       <h3>
-        {document.write("Error creating new event", error) }
-        <Link to="/news" style={{color: 'blue'}}>Go back</Link>
-      </h3>
-      
+        {document.write("Error creating new event", error)}
+        <Link to="/news" style={{ color: "blue" }}>
+          Go back
+        </Link>
+      </h3>;
     }
   };
 
@@ -85,7 +164,6 @@ const CRUD = () => {
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
-  
 
   const TabPanel = [
     {
@@ -121,10 +199,7 @@ const CRUD = () => {
 
           <div className="input">
             <label>Image URL: </label>
-            <input
-              type="text"
-              onChange={(e) => setNewImage(e.target.value)}
-              />
+            <input type="text" onChange={(e) => setNewImage(e.target.value)} />
           </div>
           <div className="input">
             <label htmlFor="category">Category</label>
@@ -135,7 +210,6 @@ const CRUD = () => {
             />
           </div>
           <Button onClick={saveNews}>Save News</Button>
-          
         </>
       ),
     },
@@ -189,23 +263,28 @@ const CRUD = () => {
         <h1>hello Admin</h1>
       </Header>
       <hr style={{ border: "0.5px solid #ececed" }} />
-      <ToastContainer/>
+      <ToastContainer />
       <AdminTab>
-      <ul>
-      {TabPanel.map((tabs) => (
-        <button
-        style={{backgroundColor: activeTab === tabs.tab ? '#c84869' : '#ddd'}}
-        onClick={() => handleTabChange(tabs.tab)}
-        role="tab" 
-        key={tabs.id}>
-          {tabs.btnName}
-        </button>
-      ))}
-      </ul>
+        <ul>
+          {TabPanel.map((tabs) => (
+            <button
+              style={{
+                backgroundColor: activeTab === tabs.tab ? "#c84869" : "#ddd",
+              }}
+              onClick={() => handleTabChange(tabs.tab)}
+              role="tab"
+              key={tabs.id}
+            >
+              {tabs.btnName}
+            </button>
+          ))}
+        </ul>
 
-      {TabPanel.map((tabs) => (
-        <main key={tabs.id}>{activeTab === tabs.tab && <>{tabs.main}</>}</main>
-      ))}
+        {TabPanel.map((tabs) => (
+          <main key={tabs.id}>
+            {activeTab === tabs.tab && <>{tabs.main}</>}
+          </main>
+        ))}
       </AdminTab>
     </div>
   );

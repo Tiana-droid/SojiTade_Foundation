@@ -20,9 +20,19 @@ const Events = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/events")
-      .then((res) => res.json())
-      .then((data) => setNews(data));
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch(
+          "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709/latest?_sort=day"
+        );
+        const dataObject = await res.json();
+        const eventArray = dataObject.record.events || []; // Access nested array or use empty array if not found
+        setNews(eventArray);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+    fetchEvents();
   }, []);
 
   const [openIndex, setOpenIndex] = useState(null);
@@ -121,6 +131,7 @@ const Events = () => {
       ) : null;
     });
   const pageCount = Math.ceil(news.length / eventPerPage);
+ 
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
@@ -163,47 +174,44 @@ const Events = () => {
               </label>
             </div>
           </InputWrapper>
-          <Link to="/login" style={{cursor: 'default'}}>
+          <Link to="/login" style={{ cursor: "default" }}>
             <FaUser />
           </Link>
         </AdminSection>
         {presentEventChecked && (
-            <Main style={{flexDirection: 'column'}}>
-              <div className="event-wrapper">
-                {news.length > 0 &&
-                news.some(
-                  (event) => new Date(event.day).getFullYear() > 2023
-                ) ? (
-                  displayPresentEvent
-                ) : (
-                  <i>No events scheduled</i>
-                )}
-              </div>
-              <>
-            {news.length > 0 &&
-            news.some((event) => new Date(event.day).getFullYear() > 2023) ? (
+          <Main style={{ flexDirection: "column" }}>
+            <div className="event-wrapper">
+              {news.length > 0 &&
+              news.some((event) => new Date(event.day).getFullYear() > 2023) ? (
+                displayPresentEvent
+              ) : (
+                <i>No events scheduled</i>
+              )}
+            </div>
+            <>
+            {news.length > 0 && news.some((event) => new Date(event.day).getFullYear() > 2023) ? (
               <ReactPaginate
-                className="paginate"
-                breakLabel="..."
-                nextLabel="next >"
-                onPageChange={handlePageClick}
-                pageCount={pageCount}
-                previousLabel="< previous"
-                renderOnZeroPageCount={null}
-              />
-            ) : null}
-              </>
-            </Main>
+                    className="paginate"
+                    breakLabel="..."
+                    nextLabel="next >"
+                    onPageChange={handlePageClick}
+                    pageCount={pageCount}
+                    previousLabel="< previous"
+                    renderOnZeroPageCount={null}
+                  />
+            ) : null
+              }
+            </>
+          </Main>
         )}
         {pastEventChecked && (
-          <Main style={{flexDirection: 'column'}}>
+          <Main style={{ flexDirection: "column" }}>
             <div className="event-wrapper">{displayPastEvent}</div>
             <ReactPaginate
               className="paginate"
               breakLabel="..."
               nextLabel="next >"
               onPageChange={handlePageClick}
-              //  pageRangeDisplayed={5}
               pageCount={pageCount}
               previousLabel="< previous"
               renderOnZeroPageCount={null}
@@ -215,7 +223,7 @@ const Events = () => {
         <p>We Need Your Support Today!</p>
         <button onClick={Donation}>Donate</button>
       </Header>
-        {showDonation&&<Donate close={Donation}/>}
+      {showDonation && <Donate close={Donation} />}
       <Footer />
     </>
   );

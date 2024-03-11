@@ -19,7 +19,7 @@ const Main = styled.div`
   height: fit-content;
 
   @media (min-height: 1300px) {
-    top: 60%;
+    top: 70%;
   }
 `;
 

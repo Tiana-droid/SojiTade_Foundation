@@ -186,12 +186,12 @@ export const Image = styled.div`
 
   img {
     width: 100%;
-    height: 120dvh;
+    height: 115dvh;
     object-fit: cover;
     object-position: center;
 
-    @media (min-width: 1000px) and (min-height: 1000px) {
-      height: 70dvh;
+    @media (min-width: 1000px) and (min-height: 600px) {
+      height: fit-content;
     }
   }
 
@@ -204,15 +204,13 @@ export const Image = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-
-    /* @media (min-width: 1000px) {
-    height: fit-content;
-  } */
-
+    
     h1 {
       color: #fff;
       font-size: clamp(40px, 8vw, 80px);
       font-weight: 700;
+      margin-left: 8px;
+      text-align: center;
     }
   }
 

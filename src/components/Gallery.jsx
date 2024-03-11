@@ -10,9 +10,18 @@ const Gallery = () => {
   useEffect(() => {
     const fetchPics = async () => {
       try {
-        const res = await fetch("http://localhost:5000/gallery");
+        const res = await fetch(
+          "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+          {
+            headers: {
+              "X-Master-Key":
+                "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+            },
+          }
+        );
         const data = await res.json();
-        setPictures(data);
+        const galleryArray = data.record.gallery;
+        setPictures(galleryArray);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -26,7 +35,7 @@ const Gallery = () => {
         <div className="pic-container">
           {pictures.map((pic) => (
             <div className="pic-wrapper" key={pic.id}>
-              <img src={pic.original} alt=""  />
+              <img src={pic.original} alt="" />
             </div>
           ))}
         </div>

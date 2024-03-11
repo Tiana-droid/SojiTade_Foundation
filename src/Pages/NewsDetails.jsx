@@ -4,12 +4,15 @@ import { Footer } from "../components";
 import NewsLogin from "../Auth/NewsLogin";
 import { Button, AdminTab, Card } from "../components/style";
 import { FaUser, FaArrowLeftLong } from "react-icons/fa6";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const NewsDetails = () => {
-  const id = new URLSearchParams(window.location.search).get("id");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const id = searchParams.get("id");
+
   const [news, setNews] = useState({});
   const [loading, setLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
@@ -26,25 +29,32 @@ const NewsDetails = () => {
   const navigate = useNavigate();
 
   const HandleLoginPage = () => {
-    setShowLoginPage(!showLoginPage)
+    setShowLoginPage(!showLoginPage);
 
     setTimeout(() => {
-      setShowLoginPage(false)
-  }, 5000);
-  }
+      setShowLoginPage(false);
+    }, 5000);
+  };
 
   useEffect(() => {
     const fetchSingleNews = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/news/${id}`);
+        const res = await fetch(
+          "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709/latest"
+        );
         if (!res.ok) {
-          throw new Error("Failed to fetch news");
+          throw new Error(`News with id ${id} not found`);
         }
         const data = await res.json();
-        setNews(data);
+
+        const newsItem = data.record.news.find((item) => item.id === id);
+        if (!newsItem) {
+          throw new Error(`News with id ${id} not found`);
+        }
+        setNews(newsItem);
         setLoading(false);
       } catch (error) {
-        toast.error("Error fetching news details", error);
+        toast.error("Error fetching news details", error.message);
         setLoading(false);
       }
     };
@@ -56,6 +66,7 @@ const NewsDetails = () => {
     setEditMode(!editMode);
     // Set initial values based on existing news details
     setValue({
+      ...news,
       id: news.id,
       title: news.title,
       day: news.day,
@@ -67,33 +78,55 @@ const NewsDetails = () => {
   const handleSaveClick = async () => {
     try {
       if (editMode) {
-        // Update existing news
-        const res = await fetch(`http://localhost:5000/news/${id}`, {
-          method: "PUT",
+        const binId = "65eeb52adc74654018b13709";
+        const apiKey =
+          "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO";
+
+        const updatedNewsItem = {
+          id: news.id,
+          title: newValue.title,
+          day: newValue.day,
+          img: newValue.img,
+          content: newValue.content,
+        };
+
+        // Fetch the current data from JSONBin.io
+        const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+          method: "GET",
           headers: {
-            "Content-Type": "application/json",
+            "X-Master-Key": apiKey,
           },
-          body: JSON.stringify({
-            title: newValue.title,
-            day: newValue.day,
-            img: newValue.img,
-            content: newValue.content,
-          }),
         });
+        const currentData = await res.json();
 
-        if (res.ok) {
-          // If the update is successful, update the local state
-          setNews({
-            ...news,
-            title: newValue.title,
-            day: newValue.day,
-            img: newValue.img,
-            content: newValue.content,
-          });
+        // Update the news item in the current data
+        const updatedNews = currentData.record.news.map((item) =>
+          item.id === news.id ? updatedNewsItem : item
+        );
 
-          // Exit edit mode
+        // Construct the updated data object
+        const updatedData = {
+          ...currentData.record,
+          news: updatedNews,
+        };
+
+        // Send the updated data in a PUT request
+        const putResponse = await fetch(
+          `https://api.jsonbin.io/v3/b/${binId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Master-Key": apiKey,
+            },
+            body: JSON.stringify(updatedData),
+          }
+        );
+
+        if (putResponse.ok) {
+          // Update the local state
+          setNews(updatedNewsItem);
           setEditMode(false);
-          // Navigate to the news page
           toast.success("News Updated successfully");
           setTimeout(() => {
             navigate("/news");
@@ -109,12 +142,40 @@ const NewsDetails = () => {
 
   const handleDeleteClick = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/news/${id}`, {
-        method: "DELETE",
+      const binId = "65eeb52adc74654018b13709";
+      const apiKey = "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO";
+  
+      // Fetch the current data from JSONBin.io
+      const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+        method: "GET",
+        headers: {
+          "X-Master-Key": apiKey,
+        },
       });
-
-      if (res.ok) {
-        // If the deletion is successful, you might redirect to the news list page or perform other actions
+      const currentData = await res.json();
+  
+      // Filter out the news item with the current ID
+      const updatedNews = currentData.record.news.filter(
+        (item) => item.id !== news.id
+      );
+  
+      // Construct the updated data object without the deleted news item
+      const updatedData = {
+        ...currentData.record,
+        news: updatedNews,
+      };
+  
+      // Send the updated data in a PUT request to delete the news item
+      const putResponse = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Master-Key": apiKey,
+        },
+        body: JSON.stringify(updatedData),
+      });
+  
+      if (putResponse.ok) {
         toast.success("News deleted successfully");
         setTimeout(() => {
           navigate("/news");
@@ -124,8 +185,10 @@ const NewsDetails = () => {
       }
     } catch (error) {
       console.error("Error deleting news:", error);
+      toast.error("Error deleting news");
     }
   };
+  
   const [activeTab, setActiveTab] = useState("tabA");
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -247,7 +310,8 @@ const NewsDetails = () => {
 
   return (
     <div>
-      <Header $height="400px" $alignItems="flex-start" gap="3em">
+      <ToastContainer />
+      <Header $height="400px" $alignItems="flex-start" $gap="3em">
         <FaArrowLeftLong
           onClick={() => {
             navigate(-1);
@@ -269,7 +333,12 @@ const NewsDetails = () => {
         </h3>
         <FaUser onClick={HandleLoginPage} />
       </AdminSection>
-      {showLoginPage && <NewsLogin showEditMode={showEditMode} setShowEditMode={setShowEditMode} />}
+      {showLoginPage && (
+        <NewsLogin
+          showEditMode={showEditMode}
+          setShowEditMode={setShowEditMode}
+        />
+      )}
       <Main2 id="news">
         {loading ? (
           <p>Loading your news please wait...</p>

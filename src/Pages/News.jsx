@@ -12,9 +12,14 @@ const News = () => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const res = await fetch("http://localhost:5000/news?_sort=day");
-      const data = await res.json();
-      setNews(data);
+      try {
+        const res = await fetch("https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709/latest?_sort=day");
+        const dataObject = await res.json();
+        const newsArray = dataObject.record.news || []; // Access nested array or use empty array if not found
+        setNews(newsArray);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
     };
     fetchNews();
   }, []);
@@ -22,16 +27,15 @@ const News = () => {
   const newsPerPage = 3;
   const pagesVisited = pageNumber * newsPerPage;
 
-  const displayNews = news
-    .slice(pagesVisited, pagesVisited + newsPerPage)
-    .map((en) => {
+  const displayNews = Array.isArray(news) && news.slice(pagesVisited, pagesVisited + newsPerPage)
+    .map((en, index) => {
       return (
         <Card className="card" key={en.id}>
           <div className="img">
-            <img srcSet={en.img} alt="network err" />
+            <img srcSet={en.img} alt="" />
           </div>
           <div className="content">
-            <h3>{en.title}.</h3>
+            <h3>{en.title}</h3>
           </div>
           <div className="btn">
             <Link to={`/news_details?id=${en.id}`}>
@@ -61,18 +65,22 @@ const News = () => {
         </Link>
       </AdminSection>
       <Wrapper>
-        <div className="card-wrapper">{displayNews}</div>
-        <ReactPaginate
-          className="paginate"
-          breakLabel="..."
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          //  pageRangeDisplayed={5}
-          pageCount={pageCount}
-          previousLabel="< previous"
-          renderOnZeroPageCount={null}
-          
-        />
+        {news.length === 0 ? (
+          <div>No news found.</div>
+          ) : (
+          <div className="card-wrapper">{displayNews}</div>
+          )}
+        {pageCount > 1 && (
+          <ReactPaginate
+            className="paginate"
+            breakLabel="..."
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+          />
+        )}
       </Wrapper>
       <Footer />
 
