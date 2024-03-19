@@ -81,11 +81,14 @@ const Events = () => {
                   )}
                 </div>
               </div>
-              <a href={`/news_details?id=${event.id}`} style={{ width: "30%" }}>
+              <Link
+                to={`/news_details?id=${event.id}`}
+                style={{ width: "30%" }}
+              >
                 <Button $borderRadius="0px" $width="100%">
                   {presentEventChecked ? "Register" : "Read News"}
                 </Button>
-              </a>
+              </Link>
             </div>
             {openIndex === index && (
               <div className="content">
@@ -131,7 +134,7 @@ const Events = () => {
       ) : null;
     });
   const pageCount = Math.ceil(news.length / eventPerPage);
- 
+
   const handlePageClick = ({ selected }) => {
     setPageNumber(selected);
   };
@@ -189,24 +192,30 @@ const Events = () => {
               )}
             </div>
             <>
-            {news.length > 0 && news.some((event) => new Date(event.day).getFullYear() > 2023) ? (
-              <ReactPaginate
-                    className="paginate"
-                    breakLabel="..."
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageCount={pageCount}
-                    previousLabel="< previous"
-                    renderOnZeroPageCount={null}
-                  />
-            ) : null
-              }
+              {news.length > 0 &&
+              news.some((event) => new Date(event.day).getFullYear() > 2023) ? (
+                <ReactPaginate
+                  className="paginate"
+                  breakLabel="..."
+                  nextLabel="next >"
+                  onPageChange={handlePageClick}
+                  pageCount={pageCount}
+                  previousLabel="< previous"
+                  renderOnZeroPageCount={null}
+                />
+              ) : null}
             </>
           </Main>
         )}
         {pastEventChecked && (
           <Main style={{ flexDirection: "column" }}>
-            <div className="event-wrapper">{displayPastEvent}</div>
+            <div className="event-wrapper">
+              {news.length > 0 ? (
+                displayPastEvent
+              ) : (
+                <p>Loading your news please wait...</p>
+              )}
+            </div>
             <ReactPaginate
               className="paginate"
               breakLabel="..."
