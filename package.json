@@ -1,5 +1,6 @@
 {
   "name": "sojitade-ngo",
+  "homepage": "https://www.sojitadefoundation.com/", 
   "version": "0.1.0",
   "private": true,
   "dependencies": {
