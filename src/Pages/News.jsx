@@ -13,7 +13,7 @@ const News = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const res = await fetch("https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709/latest?_sort=day");
+        const res = await fetch("https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712/latest?_sort=day");
         const dataObject = await res.json();
         const newsArray = dataObject.record.news || []; // Access nested array or use empty array if not found
         setNews(newsArray);

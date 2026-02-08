@@ -16,9 +16,9 @@ const Accordion = () => {
   const [news, setNews] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/events")
+    fetch("https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712")
       .then((res) => res.json())
-      .then((data) => setNews(data));
+      .then((data) => setNews(data.record.news));
   }, [news]);
   return (
     <Main>

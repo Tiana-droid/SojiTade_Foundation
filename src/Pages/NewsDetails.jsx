@@ -40,7 +40,7 @@ const NewsDetails = () => {
     const fetchSingleNews = async () => {
       try {
         const res = await fetch(
-          "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709/latest"
+          "https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712/latest"
         );
         if (!res.ok) {
           throw new Error(`News with id ${id} not found`);
@@ -78,9 +78,9 @@ const NewsDetails = () => {
   const handleSaveClick = async () => {
     try {
       if (editMode) {
-        const binId = "65eeb52adc74654018b13709";
+        const binId = "69890eb643b1c97be96f7712";
         const apiKey =
-          "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO";
+          "$2a$10$fHlVtdS4NQvjdgfxC4Qff.8Q2tzrTB8Ba.2RRBd7EH3ijDIRl0LC2";
 
         const updatedNewsItem = {
           id: news.id,
@@ -142,8 +142,9 @@ const NewsDetails = () => {
 
   const handleDeleteClick = async () => {
     try {
-      const binId = "65eeb52adc74654018b13709";
-      const apiKey = "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO";
+      const binId = "69890eb643b1c97be96f7712";
+        const apiKey =
+          "$2a$10$fHlVtdS4NQvjdgfxC4Qff.8Q2tzrTB8Ba.2RRBd7EH3ijDIRl0LC2";
   
       // Fetch the current data from JSONBin.io
       const res = await fetch(`https://api.jsonbin.io/v3/b/${binId}`, {

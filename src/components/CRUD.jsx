@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { v4 as uuidv4 } from "uuid";
 
 const CRUD = () => {
+  /* eslint-disable-next-line no-unused-vars */
   const [news, setNews] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newContent, setNewContent] = useState("");
@@ -27,15 +28,14 @@ const CRUD = () => {
   const saveNews = async () => {
     try {
       const res = await fetch(
-        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+         "https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712",
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             "X-Master-Key":
-              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
-            "X-ACCESS-KEY":
-              "$2a$10$U0AozbSuq.CgoXqnY.TVnOunKkkPIVzip0cRXTxP7LtVMx.eFz7Xu",
+              "$2a$10$fHlVtdS4NQvjdgfxC4Qff.8Q2tzrTB8Ba.2RRBd7EH3ijDIRl0LC2",
+              "X-ACCESS-KEY":"$2a$10$tUrokYFpzKn4iIRP/Kn1ZOLFA2wLlgy5QMgIIT/Xu8dTIjiWwT3r."
           },
         }
       );
@@ -61,13 +61,13 @@ const CRUD = () => {
       };
 
       const putResponse = await fetch(
-        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+         "https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712",
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             "X-Master-Key":
-              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+              "$2a$10$fHlVtdS4NQvjdgfxC4Qff.8Q2tzrTB8Ba.2RRBd7EH3ijDIRl0LC2",
           },
           body: JSON.stringify(updatedData),
         }
@@ -95,15 +95,14 @@ const CRUD = () => {
   const saveEvents = async () => {
     try {
       const res = await fetch(
-        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+         "https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712",
         {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
             "X-Master-Key":
-              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
-            "X-ACCESS-KEY":
-              "$2a$10$U0AozbSuq.CgoXqnY.TVnOunKkkPIVzip0cRXTxP7LtVMx.eFz7Xu",
+              "$2a$10$fHlVtdS4NQvjdgfxC4Qff.8Q2tzrTB8Ba.2RRBd7EH3ijDIRl0LC2",
+              "X-ACCESS-KEY":"$2a$10$tUrokYFpzKn4iIRP/Kn1ZOLFA2wLlgy5QMgIIT/Xu8dTIjiWwT3r."
           },
         }
       );
@@ -129,13 +128,13 @@ const CRUD = () => {
       };
 
       const putResponse = await fetch(
-        "https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709",
+         "https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712",
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
             "X-Master-Key":
-              "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+              "$2a$10$fHlVtdS4NQvjdgfxC4Qff.8Q2tzrTB8Ba.2RRBd7EH3ijDIRl0LC2",
           },
           body: JSON.stringify(updatedData),
         }

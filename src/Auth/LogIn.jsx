@@ -32,10 +32,10 @@ const LogIn = () => {
       return;
     }
 
-    fetch("https://api.jsonbin.io/v3/b/65eeb52adc74654018b13709", {
+    fetch("https://api.jsonbin.io/v3/b/69890eb643b1c97be96f7712", {
       headers: {
         "X-Master-Key":
-          "$2a$10$fwgqE7ZB.7nDc7q7nyVBIu0rewQsGpOT0MUNA3LNaeVeFNwKVTJYO",
+          "$2a$10$fHlVtdS4NQvjdgfxC4Qff.8Q2tzrTB8Ba.2RRBd7EH3ijDIRl0LC2",
       },
     })
       .then((res) => res.json())
